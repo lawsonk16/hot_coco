@@ -31,3 +31,5 @@ future work: add display functions for all annotation styles, or styles in conce
 
 ---
 ---
+## explore
+description: contains functions for gaining information about any coco-formatted dataset, including information about class and gsd distributions, and methods for producing data frames of relevant info to explore your data
