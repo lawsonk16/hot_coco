@@ -14,9 +14,9 @@ description: contains the functions you need to display random or specific (indi
  - specific_gt: pick a specific set of images and display the bounding box annotations on them
  - random_gt_cp: pick a number of random images and display the centerpoint (cp) annotations on them
  - specific_gt_cp: pick a specific set of images and display the centerpoint (cp) annotations on them
----
+.....
  - random_dt
  - specific_dt
----
+.....
  - random_gt_dt
  - specific_gt_dt
