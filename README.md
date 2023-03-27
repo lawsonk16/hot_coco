@@ -7,9 +7,9 @@ A set of custom packages for machine learning with [coco](https://cocodataset.or
 ## datasets
 description: contains the code to convert the dota, coco, and fair1m datasets to the coco format
 future work: add additional versions of dota and fair1m 
- - dota_to_coco
- - fair1m_to_coco
- - xview_to_coco
+ - dota.to_coco
+ - fair1m.to_coco
+ - xview.to_coco
 
 ---
 ---
