@@ -237,7 +237,7 @@ def clip_bboxes_to_ims(json_path):
     print('Removed', removed, 'annotations')
     return
 
-def xview_to_coco(geojson_path, classes_path, image_folder):
+def to_coco(geojson_path, classes_path, image_folder):
     '''
     PURPOSE: translate xview geojson to coco gt file
     IN:

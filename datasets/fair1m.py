@@ -156,7 +156,7 @@ def fair1m_coco_ims_cats_anns(xml_fp):
 
     return images, categories, annotations
 
-def fair1m_to_coco(json_path, xml_fp):
+def to_coco(json_path, xml_fp):
 
     # ensure that no duplicate content is created
     if os.path.exists(json_path):

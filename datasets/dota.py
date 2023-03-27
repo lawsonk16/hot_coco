@@ -151,7 +151,7 @@ def get_coco_license_update_images(coco_images, ann_folder_full):
         new_coco_images.append(i)
     return licenses, new_coco_images
 
-def dota_to_coco(im_folder, ann_folder, ann_folder_full, version = '1.0'):
+def to_coco(im_folder, ann_folder, ann_folder_full, version = '1.0'):
     '''
     Purpose: convert dota annotations to the coco format
     '''
