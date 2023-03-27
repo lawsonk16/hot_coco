@@ -1,8 +1,6 @@
 import os
 import json
 from tqdm import tqdm
-import bs4
-import lxml
 from bs4 import BeautifulSoup as bs
 
 
@@ -158,7 +156,7 @@ def fair1m_coco_ims_cats_anns(xml_fp):
 
     return images, categories, annotations
 
-def fair1m_json(json_path, xml_fp):
+def fair1m_to_coco(json_path, xml_fp):
 
     # ensure that no duplicate content is created
     if os.path.exists(json_path):
