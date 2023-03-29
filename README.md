@@ -7,9 +7,9 @@ A set of custom packages for machine learning with [coco](https://cocodataset.or
 ## datasets
 description: contains the code to convert the dota, coco, and fair1m datasets to the coco format
 future work: add additional versions of dota and fair1m 
- - dota_to_coco
- - fair1m_to_coco
- - xview_to_coco
+ - dota.to_coco
+ - fair1m.to_coco
+ - xview.to_coco
 
 ---
 ---
@@ -31,3 +31,5 @@ future work: add display functions for all annotation styles, or styles in conce
 
 ---
 ---
+## explore
+description: contains functions for gaining information about any coco-formatted dataset, including information about class and gsd distributions, and methods for producing data frames of relevant info to explore your data
