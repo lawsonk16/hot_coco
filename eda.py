@@ -5,6 +5,13 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 from tabulate import tabulate
 import sys
+import os
+
+cwd = os.getcwd() + '/hot_coco'
+if os.path.exists(cwd):
+    sys.path.append(cwd)
+
+
 import display as display
 
 def get_ann_df(ann_fp):
@@ -93,13 +100,13 @@ def get_cat_cm(ann_df, im_df):
     category_cm_df = pd.DataFrame(category_cm)
     return category_cm_df
 
-def get_cat_df(ann_fp):
+def get_cat_df(ann_fp, im_df):
 
     # establish basic information
     with open(ann_fp, 'r') as f:
         content = json.load(f)
     ann_df = get_ann_df(ann_fp)
-    category_cm_df = get_cat_cm(ann_df)
+    category_cm_df = get_cat_cm(ann_df, im_df)
 
     # create dataframe
     cat_df = pd.DataFrame(content['categories'])
@@ -115,11 +122,11 @@ def get_cat_df(ann_fp):
 
     return cat_df
 
-def cat_coexist_heatmap(ann_df):
+def cat_coexist_heatmap(ann_df, im_df):
     '''
     Create a heatmap indicating how many images each pair of categories appears on together
     '''
-    cat_cm_df = get_cat_cm(ann_df)
+    cat_cm_df = get_cat_cm(ann_df, im_df)
     t = [cat_cm_df.loc[c,c] for c in cat_cm_df.index]
     fig, ax = plt.subplots(figsize=(15,15))
     a = sns.heatmap(cat_cm_df.div(t).transpose(), annot=cat_cm_df, ax=ax)
@@ -181,9 +188,8 @@ def eda(ann_fp, img_fp, fig_size = (10,7), font_size = 10, return_dfs = False):
     # Show the images with the most total annotations and most categories represented
     show_ims_most_anns_cats(im_df, ann_fp, img_fp, fig_size)
 
-    
     # Display a heatmap of how often various categories coexist on imagery
-    cat_coexist_heatmap(ann_df)
+    cat_coexist_heatmap(ann_df, im_df)
 
     if return_dfs:
       return ann_df, im_df
