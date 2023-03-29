@@ -155,7 +155,7 @@ def random_gt(num_ims, json_path, image_folder, fig_size = (20,20), text_on = Tr
     
     return
 
-def specific_gt(im_ids, json_path, image_folder, fig_size = (20,20), text_on = True):
+def specific_gt(im_ids, json_path, image_folder, fig_size = (20,20), text_on = True, fig_titles=None):
     '''
     PURPOSE: Display some number of images and their ground truth labels from a coco dataset, randomly selected
     IN:
@@ -199,7 +199,10 @@ def specific_gt(im_ids, json_path, image_folder, fig_size = (20,20), text_on = T
             if text_on:
                 plt.text(b[0], b[1], cat_name, ha = "left", color = 'w')
             ax.add_patch(rect)
-        plt.title(im_name)
+        if not fig_titles:
+          plt.title(im_name)
+        else:
+          plt.title(fig_titles[im_ids.index(i)])
         plt.show()
     
     return
@@ -257,7 +260,7 @@ def random_gt_cp(num_ims, json_path, image_folder, fig_size = (20,20), text_on =
     
     return
 
-def specific_gt_cp(im_ids, json_path, image_folder, fig_size = (20,20), text_on = True, radius = 2):
+def specific_gt_cp(im_ids, json_path, image_folder, fig_size = (20,20), text_on = True, radius = 2, fig_titles=None):
     '''
     PURPOSE: Display some number of images from a coco dataset with 'centerpoint' key, specifically selected
     IN:
@@ -301,7 +304,10 @@ def specific_gt_cp(im_ids, json_path, image_folder, fig_size = (20,20), text_on 
             if text_on:
                 plt.text(b[0], b[1], cat_name, ha = "left", color = 'w')
             ax.add_patch(rect)
-        plt.title(im_name)
+        if not fig_titles:
+          plt.title(im_name)
+        else:
+          plt.title(fig_titles[im_ids.index(i)])
         plt.show()
     
     return
@@ -360,7 +366,7 @@ def random_dt(num_ims, gt_path, dt_path, image_folder, fig_size = (20,20), conf_
     
     return
 
-def specific_dt(im_ids, gt_path, dt_path, image_folder, fig_size = (20,20), conf_thresh = 0.9):
+def specific_dt(im_ids, gt_path, dt_path, image_folder, fig_size = (20,20), conf_thresh = 0.9, fig_titles=None):
     '''
     PURPOSE: Display a specific set of images and their detections from a coco dataset
     IN:
@@ -405,6 +411,10 @@ def specific_dt(im_ids, gt_path, dt_path, image_folder, fig_size = (20,20), conf
                 rect = patches.Rectangle((b[0], b[1]), b[2], b[3], edgecolor = pal[cat-1], facecolor = "none", ls = '--')
                 plt.text(b[0], b[1], cat_name, ha = "left", color = 'w')
                 ax.add_patch(rect)
+        if not fig_titles:
+          plt.title(im_name)
+        else:
+          plt.title(fig_titles[im_ids.index(i)])
         plt.show()
     
     return
@@ -473,7 +483,7 @@ def random_gt_dt(num_ims, gt_path, dt_path, image_folder, fig_size = (20,20), co
     
     return
 
-def specific_gt_dt(im_ids, gt_path, dt_path, image_folder, fig_size = (20,20), conf_thresh = 0.9):
+def specific_gt_dt(im_ids, gt_path, dt_path, image_folder, fig_size = (20,20), conf_thresh = 0.9, fig_titles=None):
     '''
     PURPOSE: Display a specific set of images and their detections from a coco dataset
     IN:
@@ -527,6 +537,10 @@ def specific_gt_dt(im_ids, gt_path, dt_path, image_folder, fig_size = (20,20), c
             rect = patches.Rectangle((b[0], b[1]), b[2], b[3], edgecolor = pal[cat-1], facecolor = "none", ls = '-')
             plt.text(b[0], b[1], cat_name, ha = "right", color = 'b')
             ax.add_patch(rect)
+        if not fig_titles:
+          plt.title(im_name)
+        else:
+          plt.title(fig_titles[im_ids.index(i)])
         plt.show()
     
     return
