@@ -177,12 +177,10 @@ def eda(ann_fp, img_fp, fig_size = (10,7), font_size = 10, return_dfs = False):
     # create a bar graph of various category counts
     print_category_counts(ann_df, fig_size, font_size)
 
-    print('\n\n')
     
     # Show the images with the most total annotations and most categories represented
     show_ims_most_anns_cats(im_df, ann_fp, img_fp, fig_size)
 
-    print('\n\n')
     
     # Display a heatmap of how often various categories coexist on imagery
     cat_coexist_heatmap(ann_df)
