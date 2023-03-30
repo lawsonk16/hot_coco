@@ -31,5 +31,14 @@ future work: add display functions for all annotation styles, or styles in conce
 
 ---
 ---
-## explore
-description: contains functions for gaining information about any coco-formatted dataset, including information about class and gsd distributions, and methods for producing data frames of relevant info to explore your data
+## eda
+description: contains a main eda function which produces some interesting information and graphics about your dataset to provide clarity as you explore it, as well as helper functions for making useful dataframes for exploring your data.
+
+ - eda: provides the following:
+  - an overview of the total images, categories, and annotations in the dataset
+  - a visualization of both the image with the most annotations and the image with the most categories annotated on it
+  - a visualization of how often each category co-exists on imagery with all the other categories
+---
+- get_ann_df: creates a dataframe for exploring the annotations in the dataset
+- get_im_df: creates a dataframe for exploring the images in the dataset
+- get_cat_df: creates a dataframe for exploring the categories in the dataset
