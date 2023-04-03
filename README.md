@@ -42,3 +42,10 @@ description: contains a main eda function which produces some interesting inform
 - get_ann_df: creates a dataframe for exploring the annotations in the dataset
 - get_im_df: creates a dataframe for exploring the images in the dataset
 - get_cat_df: creates a dataframe for exploring the categories in the dataset
+
+---
+---
+
+## classification
+description: this simply allows you to create a classification dataset from a coco object detection dataset
+ - from_coco: function which allows you to create the classification dataset in a chosen folder, with an option to pad all of the boxes by a certain number of pixels and threshold using some minimum gsd value
