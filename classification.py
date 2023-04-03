@@ -35,7 +35,7 @@ def get_category_gt(i, categories):
             return c['name']
     return "None"
 
-def classification_from_json(json_path, image_folder, classification_folder, pad=0, gsd_thresh = None):
+def from_coco(json_path, image_folder, classification_folder, pad=0, gsd_thresh = None):
 
     if not os.path.exists(classification_folder):
         os.mkdir(classification_folder)
