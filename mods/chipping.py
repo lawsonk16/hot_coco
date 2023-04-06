@@ -1,6 +1,126 @@
 from tqdm import tqdm
 import json
 import os
+from matplotlib import pyplot as plt
+
+###
+
+def get_im_gsd_from_id(im_id, gt_content):
+    '''
+    PURPOSE: Get the GSD of an image based on its id in a coco file
+    IN:
+     - im_id: int, image id for the image in question
+     - gt_content: the content from a coco ground truth file
+    OUT:
+     - pt: either the image's GSD or None if it isn'available
+    '''
+    images = gt_content['images']
+
+    for i in images:
+        if i['id'] == im_id:
+            return i['gsd']
+    print(f'GSD Missing: Image {im_id}')
+    return None 
+
+def get_anns_in_box(box, anns):
+    b_anns = []
+    
+    # Get image coordinates
+    i_x1 = box[0]
+    i_y1 = box[1]
+    i_x2 = i_x1 + box[2]
+    i_y2 = i_y1 + box[3]
+    
+    # Check each individual annotation
+    for a in anns:
+        b = a['bbox']
+        x1 = b[0]
+        y1 = b[1]
+        x2 = x1 + b[2]
+        y2 = y1 + b[3]
+        
+        # Annotations will be assigned by centerpoint
+        xc = (x1 + x2)/2
+        yc = (y1 + y2)/2
+        
+        # Check if centerpoint is within chip
+        if xc > i_x1 and xc < i_x2 and yc > i_y1 and yc < i_y2:
+            # adjust coordinates to this chip
+            n_x1 = x1 - i_x1
+            n_y1 = y1 - i_y1
+            n_x2 = n_x1 + b[2]
+            n_y2 = n_y1 + b[3]
+            
+            # Ensure this new annotation is fully on-chip
+            if n_x1 < 0:
+                n_x1 = 0
+            if n_y1 < 0:
+                n_y1 = 0
+            if n_x2 > i_x2:
+                n_x2 = i_x2
+            if n_y2 > i_y2:
+                n_y2 = i_y2
+            
+            # Calculate new width and height after key checks
+            n_w = n_x2 - n_x1
+            n_h = n_y2 - n_y1
+            
+            new_a = a.copy()
+            new_a['bbox'] = [n_x1, n_y1, n_w, n_h]
+            
+            b_anns.append(new_a)
+    return b_anns 
+
+def anns_on_image(im_id, contents):
+    '''
+    IN: 
+        - im_id: int id for 'id' in 'images' of coco json
+        - json_path: path to coco gt json
+    OUT:
+        - on_image: list of annotations on the given image
+    '''
+    
+    # Pull out annotations
+    anns = contents['annotations']
+    
+    # Create list of anns on this image
+    on_image = []
+    for a in anns:
+        if a['image_id'] == im_id:
+            on_image.append(a)
+    
+    return on_image
+
+def get_im_ids(gt_json):
+    '''
+    IN: gt coco json file
+    OUT: list of all int image ids in that file
+    '''
+    im_ids = []
+    
+    # Open file
+    with open(gt_json, 'r') as f:
+        gt = json.load(f)
+        
+    images = gt['images']
+    
+    # Gather image id from every image
+    for i in images:
+        im_ids.append(i['id'])
+    
+    # Double check that it is unique
+    im_ids = list(set(im_ids))
+    
+    return im_ids
+
+def get_im_name_from_id(im_id, gt_content):
+    images = gt_content['images']
+
+    for i in images:
+        if i['id'] == im_id:
+            return i['file_name']
+
+###
 
 def subchip_images(gt, image_folder, new_image_folder, chip_size):
     '''

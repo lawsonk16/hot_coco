@@ -1,5 +1,42 @@
 import os
 import random
+import shutil
+import json
+from tqdm import tqdm
+
+
+###
+
+def get_im_id_from_name(im_name, gt_content):
+    images = gt_content['images']
+
+    for i in images:
+        if i['file_name'] == im_name:
+            return i['id']
+    print('Missing Image', im_name)
+    return None
+
+def anns_on_image(im_id, contents):
+    '''
+    IN: 
+        - im_id: int id for 'id' in 'images' of coco json
+        - json_path: path to coco gt json
+    OUT:
+        - on_image: list of annotations on the given image
+    '''
+    
+    # Pull out annotations
+    anns = contents['annotations']
+    
+    # Create list of anns on this image
+    on_image = []
+    for a in anns:
+        if a['image_id'] == im_id:
+            on_image.append(a)
+    
+    return on_image
+
+###
 
 def test_train_split(chip_folder, test_percentage, gt, chip_size):
     

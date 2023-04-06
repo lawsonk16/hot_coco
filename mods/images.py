@@ -1,4 +1,69 @@
+import os
+import json
+from PIL import Image
+from tqdm import tqdm
 
+###
+
+def anns_on_image(im_id, contents):
+    '''
+    IN: 
+        - im_id: int id for 'id' in 'images' of coco json
+        - json_path: path to coco gt json
+    OUT:
+        - on_image: list of annotations on the given image
+    '''
+    
+    # Pull out annotations
+    anns = contents['annotations']
+    
+    # Create list of anns on this image
+    on_image = []
+    for a in anns:
+        if a['image_id'] == im_id:
+            on_image.append(a)
+    
+    return on_image
+
+
+def get_im_ids(gt_json):
+    '''
+    IN: gt coco json file
+    OUT: list of all int image ids in that file
+    '''
+    im_ids = []
+    
+    # Open file
+    with open(gt_json, 'r') as f:
+        gt = json.load(f)
+        
+    images = gt['images']
+    
+    # Gather image id from every image
+    for i in images:
+        im_ids.append(i['id'])
+    
+    # Double check that it is unique
+    im_ids = list(set(im_ids))
+    
+    return im_ids
+
+def get_im_info(im_id, gt_content):
+    '''
+    PURPOSE: Get the info of an image based on its id in a coco file
+    IN:
+     - im_id: int, image id for the image in question
+     - gt_content: the content from a coco ground truth file
+    OUT:
+     - i: either the image's info or None if it isn'available
+    '''
+    images = gt_content['images']
+
+    for i in images:
+        if i['id'] == im_id:
+            return i
+    return None
+###
 
 def convert_imgs_rgb(folder):
     '''

@@ -1,3 +1,20 @@
+import json
+from tqdm import tqdm
+import os
+
+def get_category_id_from_name(cat_name, gt_content):
+    '''
+    IN: 
+      - cat_name: str, category name from coco json
+      - gt_content: json contents of coco gt file
+    OUT: cat_id: int, category id for that named category
+    '''
+
+    for c in gt_content['categories']:
+        if c['name'] == cat_name:
+            return c['id']
+    return None
+
 def map_to_supercategories(anns, new_fp):
     '''
     PURPOSE: Given some inout coco json, map all the annotations to their 
