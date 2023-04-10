@@ -56,4 +56,6 @@ description: contains packages to prepare your data for a variety of experiments
 - splits: split a file into multiple sections, create experiments using folders or lists of images, or create a sub-section of a dataset for faster experiments
 
 
-
+---
+---
+status: some intended updates include more code for post-experimental processing, and updates to my other repos to involve the use of these renamed and cleaned up packages
