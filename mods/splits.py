@@ -5,7 +5,7 @@ import json
 from tqdm import tqdm
 
 
-###
+### support ###
 
 def get_im_id_from_name(im_name, gt_content):
     images = gt_content['images']
@@ -36,9 +36,9 @@ def anns_on_image(im_id, contents):
     
     return on_image
 
-###
+### functions ###
 
-def test_train_split(chip_folder, test_percentage, gt, chip_size):
+def train_test(chip_folder, test_percentage, gt, chip_size):
     
     all_chips = os.listdir(chip_folder)
 
@@ -63,7 +63,7 @@ def test_train_split(chip_folder, test_percentage, gt, chip_size):
     print(train_data_name, test_data_name)
     return train_data_name, test_data_name
 
-def train_val_test_split(image_folder, gt, val_precentage = 0.1, test_percentage = 0.2, data_tag = ""):
+def train_val_test(image_folder, gt, val_precentage = 0.1, test_percentage = 0.2, data_tag = ""):
     
     data_folder = '/'.join(image_folder.split('/')[:-2]) + '/'
 
@@ -115,7 +115,7 @@ def train_val_test_split(image_folder, gt, val_precentage = 0.1, test_percentage
 
     return data_folder 
 
-def make_exp_by_percentage(data_tag, keep_percent, ims_list, anns_list):
+def exp_by_percentage(data_tag, keep_percent, ims_list, anns_list):
     '''
     IN:
       - data_tag: str, describes the dataset
@@ -144,7 +144,7 @@ def make_exp_by_percentage(data_tag, keep_percent, ims_list, anns_list):
         if not os.path.exists(new_image_dir):
             os.mkdir(new_image_dir)
         # move the images
-        for im in tqdm(new_ims, desc = f'moving images'):
+        for im in tqdm(new_ims, desc = 'moving images'):
             src = ims_list[i] + im
             dst = new_image_dir + im
             shutil.copy2(src, dst)
