@@ -2,6 +2,8 @@ import json
 from tqdm import tqdm
 import os
 
+### support ###
+
 def get_category_id_from_name(cat_name, gt_content):
     '''
     IN: 
@@ -14,6 +16,8 @@ def get_category_id_from_name(cat_name, gt_content):
         if c['name'] == cat_name:
             return c['id']
     return None
+
+### functions ###
 
 def map_to_supercategories(anns, new_fp):
     '''
@@ -80,7 +84,7 @@ def map_to_supercategories(anns, new_fp):
     
     return 
 
-def make_cat_ids_match(src_anns, match_anns):
+def make_ids_match(src_anns, match_anns):
     '''
     IN: 
       - src_anns: str, path to the annotations whose category ids will provide
@@ -123,7 +127,7 @@ def make_cat_ids_match(src_anns, match_anns):
 
     return 
 
-def json_fewer_cats(old_json, cat_list, ims_no_anns = False, renumber_cats = True):
+def reduce(old_json, cat_list, ims_no_anns = False, renumber_cats = True):
     '''
     PURPOSE: Create a json with a subset of object categories
     IN:
