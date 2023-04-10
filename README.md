@@ -47,7 +47,12 @@ description: contains a main eda function which produces some interesting inform
 ---
 
 ## mods
-description: contains packages to prepare your data for a variety of experiments, including modifying or organizing your data into experimental splits (train, validation, test), creating a classification dataset, changing the categories present in the dataset, chipping your imagery, changing the data to fit geococo standards, or changing the imagery itself.
+description: contains packages to prepare your data for a variety of experiments, including the following modules:
+- categories: manage the number of categories, their id values, and other qualities in your dataset
+- chipping: 
+- classification:
+- images: 
+- splits: 
 
 
 
