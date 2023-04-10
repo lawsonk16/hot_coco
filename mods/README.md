@@ -35,6 +35,11 @@ description: functions to chip images and ensure that the information represente
 
 ## splits
 description:
+- exp_by_percentage: create an experiment using some percentage of the data, divided using number of images. Create a new folder with that percentage of the images and a new annotation file, relative to some original files and images.
+- gt_from_im_list: create a new coco ground truth file using a list of images
+- gt_from_im_folder: create a new coco ground truth file using a folder of images contained within that dataset
+- train_test: split a particular coco file into train and test (or validation) sections, by percentage
+- train_val_test: split a particular coco file into train, validation, and test sections by percentage
 
 
 
