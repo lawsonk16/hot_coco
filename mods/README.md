@@ -23,7 +23,8 @@ description: functions to chip images and ensure that the information represente
 ---
 
 ## classification
-description:
+description: create a classification dataset using a coco detection dataset
+- from_gt: given a set of images and annotations, create a classification dataset with a folder for images of each category. The items are chipped out of the images according to their bounding box, with an option to pad each box by a set number of pixels.
 
 ---
 ---
