@@ -35,14 +35,14 @@ def get_category_gt(i, categories):
             return c['name']
     return "None"
 
-def from_coco(json_path, image_folder, classification_folder, pad=0, gsd_thresh = None):
+def from_gt(coco_gt_fp, im_folder, classification_folder, pad=0, gsd_thresh = None):
 
     if not os.path.exists(classification_folder):
         os.mkdir(classification_folder)
 
     class_counts = {}
 
-    with open(json_path, 'r') as f:
+    with open(coco_gt_fp, 'r') as f:
         contents = json.load(f)
     for cat in contents['categories']:
         class_counts[cat['name']] = 0
@@ -75,7 +75,7 @@ def from_coco(json_path, image_folder, classification_folder, pad=0, gsd_thresh 
                         chip_path = classification_folder + cat_name + '/' + im_name.split('_')[0].split('.')[0] + '_' + str(class_counts[cat_name]) + '.png'
                         if not os.path.exists(chip_path):   
                             # Read the image
-                            im_path = image_folder + im_name
+                            im_path = im_folder + im_name
                             img = plt.imread(im_path)
                             for a in anns:
                                 cat = a['category_id']
@@ -109,7 +109,7 @@ def from_coco(json_path, image_folder, classification_folder, pad=0, gsd_thresh 
                 chip_path = classification_folder + cat_name + '/' + im_name.split('_')[0].split('.')[0] + '_' + str(class_counts[cat_name]) + '.png'
                 if not os.path.exists(chip_path):   
                     # Read the image
-                    im_path = image_folder + im_name
+                    im_path = im_folder + im_name
                     img = plt.imread(im_path)
                     for a in anns:
                         cat = a['category_id']
