@@ -19,19 +19,19 @@ def get_category_id_from_name(cat_name, gt_content):
 
 ### functions ###
 
-def map_to_supercategories(anns, new_fp):
+def map_to_supercategories(coco_gt, new_fp):
     '''
     PURPOSE: Given some inout coco json, map all the annotations to their 
     supercategories for a more generalized experiment
     IN:
-      - ann: str, fp to coco annotation file
+      - coco_gt: str, file path to coco annotation file
       - new_fp: str, fp to new coco annotation file
     
     OUT: Nothing, the new file will be created at the specified path
     '''
 
     # open the annotations
-    with open(anns, 'r') as f:
+    with open(coco_gt, 'r') as f:
         gt = json.load(f)
     
     ### Categories ###
@@ -84,21 +84,21 @@ def map_to_supercategories(anns, new_fp):
     
     return 
 
-def make_ids_match(src_anns, match_anns):
+def make_ids_match(src_coco_gt, match_coco_gt):
     '''
     IN: 
-      - src_anns: str, path to the annotations whose category ids will provide
+      - src_coco_gt: str, path to the annotations whose category ids will provide
                   the mapping
-      - match_anns: str, path to annotations whose categories will be remapped
+      - match_coco_gt: str, path to annotations whose categories will be remapped
     OUT: None, the categories will be remapped in place
     PURPOSE: Given two sets of coco annotations whose categories match, 
     ensure that the ids of each category are the same by forcing 
     match_anns categories to match src_anns categories
     '''
     # Open the annotations
-    with open(src_anns, 'r') as f:
+    with open(src_coco_gt, 'r') as f:
         src_gt = json.load(f)
-    with open(match_anns, 'r') as f:
+    with open(match_coco_gt, 'r') as f:
         match_gt = json.load(f)
     
     # Get the lists of categories
@@ -121,26 +121,26 @@ def make_ids_match(src_anns, match_anns):
     match_gt['categories'] = src_cats
     
     # Save out a new file
-    os.remove(match_anns)
-    with open(match_anns, 'w') as f:
+    os.remove(match_coco_gt)
+    with open(match_coco_gt, 'w') as f:
         json.dump(match_gt, f)
 
     return 
 
-def reduce(old_json, cat_list, ims_no_anns = False, renumber_cats = True):
+def reduce(old_coco_gt, cat_list, ims_no_anns = False, renumber_cats = True):
     '''
     PURPOSE: Create a json with a subset of object categories
     IN:
-        -old_json: gt coco json
+        -old_coco_gt: file path to ground truth coco json
         -cat_list: list of int category ids to be included in new coco gt json
         -ims_no_anns: if False (default), remove images without annotations from 'images', else keep all original images
     OUT: (new_name) path to new json file 
     '''
     # Name new json by the number of categories being included
-    new_name = old_json.replace('.', '_{}.'.format(len(cat_list)))
+    new_name = old_coco_gt.replace('.', '_{}.'.format(len(cat_list)))
     
     # Open original gt json
-    with open(old_json, 'r') as f:
+    with open(old_coco_gt, 'r') as f:
         contents = json.load(f)
         
     # Pull out key sections of old gt 
