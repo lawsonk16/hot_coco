@@ -1,5 +1,7 @@
 # hot_coco
-A set of custom packages for machine learning with [coco](https://cocodataset.org/#format-data) datasets and focused on remote sensing, including visualizations, data transformations, and experimental prep
+A set of custom packages for machine learning with [coco](https://cocodataset.org/#format-data) datasets and focused on remote sensing, including visualizations, data transformations, and experimental prep.
+
+Last updated: 4/10/23
 
 ---
 ---
@@ -49,10 +51,9 @@ description: contains a main eda function which produces some interesting inform
 ## mods
 description: contains packages to prepare your data for a variety of experiments, including the following modules:
 - categories: manage the number of categories, their id values, and other qualities in your dataset
-- chipping: 
-- classification:
-- images: 
-- splits: 
+- classification: create a classification dataset from a detection dataset
+- images: chip and modify images and associated annotations, ensure that images and annotations are formatted correctly
+- splits: split a file into multiple sections, create experiments using folders or lists of images, or create a sub-section of a dataset for faster experiments
 
 
 
